@@ -1,9 +1,7 @@
-# BATS test file to run after executing 'examples/init.pp' with puppet.
-#
-# For more info on BATS see https://github.com/sstephenson/bats
+@test "testcase removed" {
+  ! grep 'munted' /etc/nsswitch.conf
+}
 
-# Tests are really easy! just the exit status of running a command...
-@test "addition using bc" {
-  result="$(ls /)"
-  [ "$?" -eq 0 ]
+@test "nsswitch fixed" {
+  ! grep -E '^hosts:[[:space]]*files dns' /etc/nsswitch.conf
 }

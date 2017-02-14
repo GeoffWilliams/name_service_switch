@@ -1,48 +1,37 @@
-# Class: name_service_switch
-# ===========================
+# Name_service_switch
 #
-# Full description of class name_service_switch here.
-#
-# Parameters
-# ----------
-#
-# Document parameters here.
-#
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
-#
-# Examples
-# --------
-#
-# @example
-#    class { 'name_service_switch':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
-#
-# Authors
-# -------
-#
-# Author Name <author@domain.com>
-#
-# Copyright
-# ---------
-#
-# Copyright 2017 Your name here, unless otherwise noted.
-#
-class name_service_switch {
+# Manage the name service switch - nsswitch.conf on linux and solaris,
+# /etc/netsvc.conf on aix
+class name_service_switch(
+    String              $nss_owner  = $name_service_switch::params::nss_owner,
+    String              $nss_path   = $name_service_switch::params::nss_path,
+    String              $nss_group  = $name_service_switch::params::nss_group,
+    String              $nss_mode   = $name_service_switch::params::nss_mode,
+    String              $ldelim     = $name_service_switch::params::ldelim,
+    String              $delim      = $name_service_switch::params::delim,
+    String              $rdelim     = $name_service_switch::params::rdelim,
+    Hash[String,String] $entries    = $name_service_switch::params::entries,
+) inherits name_service_switch::params {
 
+  file { $nss_path:
+    ensure => file,
+    owner  => $nss_owner,
+    group  => $nss_group,
+    mode   => $nss_mode,
+  }
+
+  $ldelim_re = $ldelim ? {
+    ""      => "",
+    default => "${ldelim}*",
+  }
+
+  $entries.each |$key, $value| {
+    file_line { "${nss_path} ${key}":
+      ensure => present,
+      path   => $nss_path,
+      line   => "${key}${ldelim}${delim}${rdelim}${value}",
+      match  => "^${key}${ldelim_re}${delim}",
+    }
+  }
 
 }
