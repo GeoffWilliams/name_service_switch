@@ -18,7 +18,6 @@ Manage the name service switch - `/etc/nsswitch.conf` on Linux and Solaris, `/et
 ### What name_service_switch affects
 * Manage entries in  `/etc/nsswitch.conf` or `/etc/netsvc.conf` file depending on OS
 * Takes ownership of existing entries based on `file_line` match patterns, does not rewrite the entire file
-* Restarts the dns-client on Solaris
 
 ## Usage
 
@@ -45,10 +44,8 @@ Ensures that `hosts` line is set to `files dns myhostname` and the `bar` line is
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+### Classes
+* `name_service_switch` - Manage entries in the correct naming switch file
 
 ## Limitations
 
