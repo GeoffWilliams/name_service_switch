@@ -1,0 +1,15 @@
+{
+  "name": "geoffwilliams-name_service_switch",
+  "version": "0.1.0",
+  "author": "geoffwilliams",
+  "summary": "Manage the name service switch - nsswitch.conf on linux and solaris, /etc/netsvc.conf on aix",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GeoffWilliams/name_service_switch",
+  "project_page": "https://github.com/GeoffWilliams/name_service_switch",
+  "issues_url": "https://github.com/GeoffWilliams/name_service_switch/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
