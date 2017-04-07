@@ -43,14 +43,20 @@ class { "name_service_switch":
 Ensures that `hosts` line is set to `files dns myhostname` and the `bar` line is set to `foo baz`.  If `bar` doesn't exist, it will be added to the file.
 
 ## Reference
+[generated documentation](https://rawgit.com/GeoffWilliams/name_service_switch/master/doc/index.html).
 
-### Classes
-* `name_service_switch` - Manage entries in the correct naming switch file
+Reference documentation is generated directly from source code using [puppet-strings](https://github.com/puppetlabs/puppet-strings).  You may regenerate the documentation by running:
+
+```shell
+bundle exec puppet strings
+```
+
+
+The documentation is no substitute for reading and understanding the module source code, and all users should ensure they are familiar and comfortable with the operations this module performs before using it.
+
 
 ## Limitations
 
-* Assumes that cron itself is already installed
-* Does not attempt to manage the cron services
 * Not supported by Puppet, Inc.
 
 ## Development

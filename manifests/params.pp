@@ -28,6 +28,8 @@ class name_service_switch::params {
         "ipnodes" => "files dns",
       }
     }
+    "Suse",
+    "Debian",
     "RedHat": {
       $nss_path   = "/etc/nsswitch.conf"
       $nss_group  = "root"
@@ -36,7 +38,6 @@ class name_service_switch::params {
       $delim      = ":"
       $rdelim     = "\t"
       $entries    = {"hosts" => "files dns"}
-
     }
     default: {
       fail("class ${name} does not support ${facts['os']['family']}")

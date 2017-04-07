@@ -1,6 +1,6 @@
 {
   "name": "geoffwilliams-name_service_switch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "geoffwilliams",
   "summary": "Manage the name service switch - nsswitch.conf on linux and solaris, /etc/netsvc.conf on aix",
   "license": "Apache-2.0",
@@ -12,4 +12,3 @@
   ],
   "data_provider": null
 }
-

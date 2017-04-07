@@ -1,7 +1,30 @@
 # Name_service_switch
 #
-# Manage the name service switch - nsswitch.conf on linux and solaris,
-# /etc/netsvc.conf on aix
+# Manage the name service switch - Manage the name service switch -
+# `/etc/nsswitch.conf` on Linux and Solaris, `/etc/netsvc.conf` on AIX
+#
+# The different supported platforms have different ways of assigning values in
+# their respective configuration files.  For example, solaris uses:
+# `:\tVALUE`
+# Whereas AIX uses:
+# ` = `
+# In the examples above, up-to three characters are used to delimit a key vs a
+# value.  Taking AIX, ldelim is ``, delim is `` and rdelim is ``.
+#
+# The module largely takes care of these idiosyncrasies itself, however, you may
+# override via parameters if necessary
+#
+# @param nss_owner File owner for files managed
+# @param nss_path Path to file containing name service switch information
+# @param nss_group File group for files managed
+# @param nss_mode File mode for files managed
+# @param ldelim Left delimiter between a key and a value
+# @param delim Central delimiter between a key and a value
+# @param rdelim Right delimiter between a key and a value
+# @param entries Hash of key value pairs to add to the name service switch file.
+#   If entries already exist they will be edited to show the values in this hash.
+#   The keyname is the the switch you are changing, eg `hosts` and the value is
+#   the desired new setting, eg `files dns`
 class name_service_switch(
     String              $nss_owner  = $name_service_switch::params::nss_owner,
     String              $nss_path   = $name_service_switch::params::nss_path,

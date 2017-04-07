@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.8
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<p><a href="https://travis-ci.org/GeoffWilliams/name_service_switch"><img
+src="https://travis-ci.org/GeoffWilliams/name_service_switch.svg?branch=master"></a></p>
+
+<h1 id="label-name_service_switch">name_service_switch</h1>
+
+<h4 id="label-Table+of+Contents">Table of Contents</h4>
+<ol><li>
+<p><a href="#description">Description</a></p>
+</li><li>
+<p><a href="#usage">Usage - Configuration options and additional
+functionality</a></p>
+</li><li>
+<p><a href="#reference">Reference - An under-the-hood peek at what the module
+is doing and how</a></p>
+</li><li>
+<p><a href="#limitations">Limitations - OS compatibility, etc.</a></p>
+</li><li>
+<p><a href="#development">Development - Guide for contributing to the
+module</a></p>
+</li></ol>
+
+<h2 id="label-Description">Description</h2>
+
+<p>Manage the name service switch - <code>/etc/nsswitch.conf</code> on Linux
+and Solaris, <code>/etc/netsvc.conf</code> on AIX</p>
+
+<h2 id="label-Setup">Setup</h2>
+
+<h3 id="label-What+name_service_switch+affects">What name_service_switch affects</h3>
+<ul><li>
+<p>Manage entries in <code>/etc/nsswitch.conf</code> or
+<code>/etc/netsvc.conf</code> file depending on OS</p>
+</li><li>
+<p>Takes ownership of existing entries based on <code>file_line</code> match
+patterns, does not rewrite the entire file</p>
+</li></ul>
+
+<h2 id="label-Usage">Usage</h2>
+
+<h3 id="label-Basic">Basic</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_include'>include</span> <span class='id identifier rubyid_name_service_switch'>name_service_switch</span>
+</code></pre>
+
+<p>Simplest usage, just sets the <code>hosts:</code> entry to <code>files
+dns</code>.</p>
+
+<h3 id="label-Custom">Custom</h3>
+
+<pre class="code ruby"><code class="ruby">class { &quot;name_service_switch&quot;:
+    entries =&gt; {
+      &quot;hosts&quot; =&gt; &quot;files dns myhostname&quot;,
+      &quot;bar&quot;   =&gt; &quot;foo baz&quot;
+    }
+}</code></pre>
+
+<p>Ensures that <code>hosts</code> line is set to <code>files dns
+myhostname</code> and the <code>bar</code> line is set to <code>foo
+baz</code>. If <code>bar</code> doesn&#39;t exist, it will be added to the
+file.</p>
+
+<h2 id="label-Reference">Reference</h2>
+
+<p><a
+href="https://rawgit.com/GeoffWilliams/name_service_switch/master/doc/index.html">generated
+documentation</a>.</p>
+
+<p>Reference documentation is generated directly from source code using <a
+href="https://github.com/puppetlabs/puppet-strings">puppet-strings</a>. You
+may regenerate the documentation by running:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_puppet'>puppet</span> <span class='id identifier rubyid_strings'>strings</span>
+</code></pre>
+
+<p>The documentation is no substitute for reading and understanding the module
+source code, and all users should ensure they are familiar and comfortable
+with the operations this module performs before using it.</p>
+
+<h2 id="label-Limitations">Limitations</h2>
+<ul><li>
+<p>Not supported by Puppet, Inc.</p>
+</li></ul>
+
+<h2 id="label-Development">Development</h2>
+
+<p>PRs accepted :)</p>
+
+<h2 id="label-Testing">Testing</h2>
+
+<p>This module supports testing using <a
+href="https://github.com/GeoffWilliams/pdqtest">PDQTest</a>.</p>
+
+<p>Test can be executed with:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+<span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_pdqtest'>pdqtest</span> <span class='id identifier rubyid_all'>all</span>
+</code></pre>
+
+<p>See <code>.travis.yml</code> for a working CI example</p>
+</div></div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
